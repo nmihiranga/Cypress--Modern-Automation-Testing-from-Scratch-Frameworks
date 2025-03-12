@@ -1,7 +1,6 @@
 describe('My First Test Suite', function() {
 
   it('My First TestCase', function() {
-
     cy.visit('https://rahulshettyacademy.com/seleniumPractise/#/');
     cy.get('.search-keyword').type('ca');
 
@@ -27,7 +26,6 @@ describe('My First Test Suite', function() {
     cy.get('.brand').then(function(logoElement) {
       cy.log(logoElement.text());
     });
-
   });
 
 })
