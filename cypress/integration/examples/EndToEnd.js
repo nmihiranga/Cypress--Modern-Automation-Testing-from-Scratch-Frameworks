@@ -1,8 +1,4 @@
 import HomePage from '../../support/pageObjects/HomePage';
-import ProductPage from '../../support/pageObjects/ProductPage';
-import CartPage from '../../support/pageObjects/CartPage';
-import ConfirmationPage from '../../support/pageObjects/ConfirmationPage';
-
 
 describe('End to End Test', () => {
 
