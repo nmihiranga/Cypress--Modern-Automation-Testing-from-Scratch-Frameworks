@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-20T14:09:43.859Z",
+    "end": "2025-03-20T14:09:50.633Z",
+    "duration": 6774,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "449e4544-cb19-4657-b915-9f86360dd15a",
+      "title": "",
+      "fullFile": "cypress\\integration\\examples\\Test3.js",
+      "file": "cypress\\integration\\examples\\Test3.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "041b3d79-f79b-4439-adad-84eb8e4c6368",
+          "title": "My Third Test Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "My Third Test Case",
+              "fullTitle": "My Third Test Suite My Third Test Case",
+              "timedOut": null,
+              "duration": 4823,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://rahulshettyacademy.com/AutomationPractice/');\n// Checkboxes\ncy.get('#checkBoxOption1').check().should('be.checked').and('have.value', 'option1');\ncy.get('#checkBoxOption1').uncheck().should('not.be.checked');\n// To select multiple check boxes at once\ncy.get('input[type=\"checkbox\"]').check(['option2', 'option3']);\n// Static dropdown\ncy.get('select').select('option2').should('have.value', 'option2');\n// Dynamic dropdown\ncy.get('#autocomplete').type('aus');\ncy.get('.ui-menu-item div').each(($el, index, $list) => {\n  if ($el.text() === 'Austria') {\n    cy.wrap($el).click();\n  }\n});\ncy.get('#autocomplete').should('have.value', 'Austria');\n// Visible and invisible elements\ncy.get('#displayed-text').should('be.visible');\ncy.get('#hide-textbox').click();\ncy.get('#displayed-text').should('not.be.visible');\ncy.get('#show-textbox').click();\ncy.get('#displayed-text').should('be.visible');\n// Radio buttons\ncy.get('[value=\"radio2\"]').check().should('be.checked');",
+              "err": {},
+              "uuid": "ddd6f6cb-caa3-4be2-a6cf-8093d6c9f8d5",
+              "parentUUID": "041b3d79-f79b-4439-adad-84eb8e4c6368",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ddd6f6cb-caa3-4be2-a6cf-8093d6c9f8d5"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4823,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress\\reports\\.jsons",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

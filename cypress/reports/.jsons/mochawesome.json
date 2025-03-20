@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-20T14:08:18.110Z",
+    "end": "2025-03-20T14:08:30.966Z",
+    "duration": 12856,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "83b8e50e-5104-4fd3-a7c1-59480e7e6960",
+      "title": "",
+      "fullFile": "cypress\\integration\\examples\\EndToEnd.js",
+      "file": "cypress\\integration\\examples\\EndToEnd.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5a8ea432-1503-4ccd-8eaf-48e3106573c9",
+          "title": "End to End Test",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "My End to End Test case",
+              "fullTitle": "End to End Test My End to End Test case",
+              "timedOut": null,
+              "duration": 10549,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Use `function` instead of `() =>` when using Fixtures\nconst productName = this.data.productName;\n// HomePage\nthis.homePage.goTo(Cypress.env('url') + '/loginpagePractise/');\nconst productPage = this.homePage.login(this.data.username, this.data.password);\n// ProductPage\nproductPage.pageValidation();\nproductPage.getCardCount().should('have.length', 4);\nproductPage.selectProduct(productName);\nproductPage.selectFirstProduct();\nconst cartPage = productPage.goToCart();\n// CartPage\ncartPage.sumOfProducts().then(sum => {\n  expect(sum).to.be.lessThan(200000);\n});\nconst confirmationPage = cartPage.checkout();\n// ConfirmationPage\nconfirmationPage.submitFormDetails();\nconfirmationPage.getAlert().should('contain', 'Success!');",
+              "err": {},
+              "uuid": "be914259-b26b-4880-88bc-a615e169b69f",
+              "parentUUID": "5a8ea432-1503-4ccd-8eaf-48e3106573c9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "be914259-b26b-4880-88bc-a615e169b69f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 10549,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress\\reports\\.jsons",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
