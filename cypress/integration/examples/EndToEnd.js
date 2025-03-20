@@ -1,8 +1,15 @@
+import HomePage from '../../support/pageObjects/HomePage';
+import ProductPage from '../../support/pageObjects/ProductPage';
+import CartPage from '../../support/pageObjects/CartPage';
+import ConfirmationPage from '../../support/pageObjects/ConfirmationPage';
+
+
 describe('End to End Test', () => {
 
   before(function () { // Use `function` instead of `() =>` when using Fixtures
     cy.fixture('example').then((data) => {
       this.data = data;
+      this.homePage = new HomePage();
     });
   });
 
@@ -10,46 +17,26 @@ describe('End to End Test', () => {
 
     const productName = this.data.productName;
 
-    cy.visit('https://rahulshettyacademy.com/loginpagePractise/');
-    cy.get('#username').type(this.data.username);
+    // HomePage
+    this.homePage.goTo('https://rahulshettyacademy.com/loginpagePractise/');
+    const productPage = this.homePage.login(this.data.username, this.data.password);
 
-    cy.get('#password').type(this.data.password);
-    cy.contains('Sign In').click();
+    // ProductPage
+    productPage.pageValidation();
+    productPage.getCardCount().should('have.length', 4);
+    productPage.selectProduct(productName);
+    productPage.selectFirstProduct();
+    const cartPage = productPage.goToCart();
 
-    cy.contains('Shop Name').should('be.visible');
-    cy.get('app-card').should('have.length', 4);
-
-    /*cy.get('app-card').each(($el, index, $list) => {
-      const product = $el.find('h4.card-title').text();
-      if (product.includes(productName)) {
-        $el.find('button').click();
-      }
-    });
-    */
-
-    // Same as above
-    cy.get('app-card').filter(`:contains(${productName})`).then(($el) => {
-      cy.wrap($el).contains('button', 'Add').click();
-    });
-
-    cy.get('app-card').eq(0).contains('button', 'Add').click();
-    cy.contains('a', 'Checkout').click();
-
-    let sum = 0;
-    cy.get('tr td:nth-child(4) strong').each(($el, index, $list) => {
-      const amount = $el.text();
-      let res = amount.split(' ')[1].trim();
-      sum = Number(sum) + Number(res);
-    }).then(() => {
+    // CartPage
+    cartPage.sumOfProducts().then((sum) => {
       expect(sum).to.be.lessThan(200000);
     });
+    const confirmationPage = cartPage.checkout();
 
-    cy.contains('button', 'Checkout').click();
-    cy.get('#country').type('India');
-    cy.get('.suggestions > ul > li > a', { timeout: 10000 }).click();
-    //cy.get('.checkbox').click();
-    cy.contains('input', 'Purchase').click();
-    cy.get('.alert').should('contain', 'Success!');
+    // ConfirmationPage
+    confirmationPage.submitFormDetails();
+    confirmationPage.getAlert().should('contain', 'Success!');
 
   });
 
