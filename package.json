@@ -16,5 +16,15 @@
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
     "@cypress/browserify-preprocessor": "latest"
+  },
+  "cypress-cucumber-preprocessor": {
+    "json": {
+    "enabled": false,
+    "output": "cypress/cucumberReports/cucumber-report.json"
+    },
+    "html": {
+    "enabled": true,
+    "output": "cypress/cucumberReports/cucumber-report.html"
+    }
   }
 }

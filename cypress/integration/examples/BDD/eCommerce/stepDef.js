@@ -13,6 +13,12 @@ When('I login to the website', function() {
   this.productPage.getCardCount().should('have.length', 4);
 });
 
+/* #To read the data from the feature file
+When('I login to the website', function() {
+  this.productPage = homePage.login(dataTable.rawTable[1][0], dataTable.rawTable[1][1]);
+});
+*/
+
 When('I add the product to the cart', function() {
   this.productPage.selectProduct(this.data.productName);
   this.productPage.selectFirstProduct();
