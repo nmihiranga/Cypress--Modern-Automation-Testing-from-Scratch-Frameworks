@@ -1,4 +1,7 @@
-describe('JWT Token', async function() {
+
+
+describe('Excel Validations', () => {
+
   it('Is logged through local storage', async function() {
     cy.LoginAPI().then(function() {
       cy.visit('https://rahulshettyacademy.com/client', {
@@ -21,13 +24,15 @@ describe('JWT Token', async function() {
 
     cy.wait(2000);
 
-    cy.get('.order-summary > tbody > tr > button').eq(0).click();
+    cy.get('.order-summary > tbody > tr > button').eq(1).click();
 
-    cy.readFile(Cypress.config('fileServerFolder')+'/cypress/downloads/order-invoice_nm.csv').then((csvString) => {
-      cy.task('parseCsv', { csvString }).then((data) => {
-        expect(data[0]['Product Name']).to.equal('ADIDAS ORIGINAL');
-      });
+    // Excel to JSON
+    const filePath = Cypress.config('fileServerFolder')+'/cypress/downloads/order-invoice_nm.xlsx';
+    cy.task('excelToJsonConv', filePath).then(function(result) {
+      cy.log(result);
     });
+     
+    //console.log(result);
 
   });
 

@@ -1,5 +1,10 @@
 const { defineConfig } = require("cypress");
 
+// Excel to JSON
+'use strict';
+const excelToJson = require('convert-excel-to-json');
+const fs = require('fs');
+
 const browserify = require("@cypress/browserify-preprocessor");
 const {
   addCucumberPreprocessorPlugin,
@@ -25,6 +30,16 @@ async function setupNodeEvents(on, config) {
           return neatCsv(csvString); // Returns a promise
         },
       });
+
+  // Task to convert excel to JSON
+  on('task', {
+    excelToJsonConv(filePath) {
+      const result = excelToJson({
+        source: fs.readFileSync(filePath) // fs.readFileSync return a Buffer
+      }); 
+      return result;
+    }
+  })
 
   // Make sure to return the config object as it might have been modified by the plugin.
   return config;
