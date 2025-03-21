@@ -30,10 +30,14 @@ describe('Excel Validations', () => {
     const filePath = Cypress.config('fileServerFolder')+'/cypress/downloads/order-invoice_nm.xlsx';
     cy.task('excelToJsonConv', filePath).then(function(result) {
       cy.log(result);
+      expect(result.data[1].B).to.equal('ADIDAS ORIGINAL');
     });
      
-    //console.log(result);
-
+    // To read the text in the downloaded file
+    cy.readFile(filePath).then(function(text) {
+      expect(text).to.include('ADIDAS ORIGINAL');
+    })
+    
   });
 
 });
