@@ -18,6 +18,14 @@ async function setupNodeEvents(on, config) {
     browserify(preprendTransformerToOptions(config, browserify.defaultOptions)),
   );
 
+  // neat-csv
+  const neatCsv = (await import('neat-csv')).default;
+      on('task', {
+        parseCsv({ csvString }) {
+          return neatCsv(csvString); // Returns a promise
+        },
+      });
+
   // Make sure to return the config object as it might have been modified by the plugin.
   return config;
 }
@@ -46,7 +54,7 @@ module.exports = defineConfig({
 
   e2e: {
     setupNodeEvents,
-    specPattern: 'cypress/integration/examples/BDD/*.feature',
+    specPattern: 'cypress/integration/examples/*.js',
   },
 
 });
